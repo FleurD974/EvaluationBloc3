@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>La billeterie des Jeux Olympiques en France</h1>
+
+{% for offer in offers %}
+    <h2>{{ offer.offer_name }}</h2>
+    <a href="{{ offer.get_absolute_url }}">Voir l'offre</a>
+{% endfor %}
+
 {% endblock %}
