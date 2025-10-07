@@ -17,11 +17,15 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from accounts.views import signup, logout_user, login_user
 from store.views import index, offer_detail
 from Billeterie import settings
 
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
+    path('signup/', signup, name="signup"),
+    path('login/', login_user, name="login"),
+    path('logout/', logout_user, name="logout"),
     path('offers/<str:slug>', offer_detail, name="offer"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
