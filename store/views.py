@@ -37,3 +37,17 @@ def delete_cart(request):
         cart.delete()
         
     return redirect('index')
+
+def create_checkout_session(request):
+    cart = request.user.cart
+    items_in_cart = [{"price": order.offer.offer_price,
+                        "quantity": order.quantity} for order in cart.orders.all()]
+    
+    return redirect('index', code=303)
+
+def checkout_success(request):
+    # faire ici la mise à jour du panier des order et tout après achat.
+    return render(request, 'store/success.html')
+
+def conplete_order():
+    pass
