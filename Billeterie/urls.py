@@ -17,13 +17,14 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from accounts.views import signup, logout_user, login_user
+from accounts.views import signup, logout_user, login_user, profile
 from store.views import index, offer_detail, add_to_cart, cart, delete_cart, create_checkout_session, checkout_success
 from Billeterie import settings
 
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
+    path('profile/', profile, name="profile"),
     path('signup/', signup, name="signup"),
     path('login/', login_user, name="login"),
     path('logout/', logout_user, name="logout"),
