@@ -1,7 +1,64 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-
+    <main>
+        <div class="container col-xxl-8 px-4 py-5">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="{% static 'img/paris.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="La ville des Paris" width="700" height="500" loading="lazy">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3">Paris acceuille les Jeux olympiques 2024!</h1>
+                    <p class="lead">La ville Lumière a la chance et l'honneur d'acceuillir les Jeux olympiques et paralympiques de 2024. Vous pourrez trouver sur ce site différentes offres vous permettant d'accèder aux épreuves.</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <a href="#" class="btn btn-primary btn-lg px-4 me-md-2">Accéder aux offres</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h2>Qu'est ce que les Jeux olympiques ?</h2>
+            <p>
+                Les Jeux olympiques d'été c'est avant tout une compétition sportive rassemblant les payx du monde entier.
+                Ces jeux se déroulent tous les 4 ans et le pays hôte change pour chaque édition.
+                La création du format que l'on connait de ces jeux remontent en 1896 à Athènes mais leur origine est bien plus ancienne : la Grèce antique.
+            </p>
+        </div>
+        <div class="container">
+            <h2>Ce qui vous attend pour cette édition:</h2>
+            <ul>
+                <li>Des épreuves tous les jours pendant une 15 jours</li>
+                <li>Des animations dans divers lieux</li>
+                <li>Des épreuves se déroulant sur tout le territoire français</li>
+            </ul>
+        </div>
+                <div class="container">
+            <h2>Quelles épreuves pourrez vous retrouver ?</h2>
+            <div class="d-flex justify-content-between">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/volleyball.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title">Volley-ball</h5>
+                            <p class="card-text">Sport collectif qui oppose 2 équipes de 6 personnes. Ces équipes sont séparés par un filet et un match peut durer de 1h à 1h30.</p>
+                        </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/escrime.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                    <div class="card-body">
+                        <h5 class="card-title">L'escrime</h5>
+                        <p class="card-text">Sport de combat qui oppose 2 athlètes devant effectuer des touches à l'aide d'un fleuret. Le but étant d'effectuer 15 touches pour l'emporter.</p>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/athletisme.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                    <div class="card-body">
+                        <h5 class="card-title">L'athlétisme</h5>
+                        <p class="card-text">Sport incontournable des JO, l'athlétisme comprend en réalité un ensemble d'épreuves sportives telles que le saut, la course...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 {% for offer in offers %}
     <h2>{{ offer.offer_name }}</h2>
     <a href="{{ offer.get_absolute_url }}">Voir l'offre</a>
