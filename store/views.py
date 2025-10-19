@@ -44,7 +44,7 @@ def add_to_cart(request, slug):
         order.quantity += 1
         order.save()
         
-    return redirect(reverse("offer", kwargs={"slug": slug}))
+    return redirect(reverse("store:offer", kwargs={"slug": slug}))
 
 def delete_cart(request):
     if cart := request.user.cart:
@@ -60,7 +60,8 @@ def create_checkout_session(request):
     return redirect('index', code=303)
 
 def checkout_success(request):
-    # faire ici la mise à jour du panier des order et tout après achat.
+    # faire ici la mise à jour des order et tout après achat.
+    request.user.cart.delete()
     return render(request, 'store/success.html')
 
 def conplete_order():

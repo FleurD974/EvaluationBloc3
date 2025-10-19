@@ -11,16 +11,17 @@
     </a>
 
     {% if user.is_authenticated %}
-        {{ user.username }}
-        <a href="{% url 'logout' %}">Se déconnecter</a>
+        {{ user.first_name }}
+        <a href="{% url 'accounts:profile' %}">Mon profil</a>
+        <a href="{% url 'accounts:logout' %}">Se déconnecter</a>
     {% else %}
-        <a href="{% url 'login' %}">Connexion</a>
-        <a href="{% url 'signup' %}">S'inscrire</a>
+        <a href="{% url 'accounts:login' %}">Connexion</a>
+        <a href="{% url 'accounts:signup' %}">S'inscrire</a>
     {% endif %}
 
     {% if user.cart and not user.cart.ordered %}
     <p>
-        <a href="{% url 'cart' %}">Voir le panier ({{ user.cart.orders.count }})</a>
+        <a href="{% url 'store:cart' %}">Voir le panier ({{ user.cart.orders.count }})</a>
     </p>
     {% endif %}
 

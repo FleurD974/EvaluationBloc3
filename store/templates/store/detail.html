@@ -9,7 +9,7 @@
     
     {% if user.is_authenticated %}
     <p>
-        <a href="{% url 'add-to-cart' offer.offer_slug %}">Ajouter au panier</a>
+        <a href="{% url 'store:add-to-cart' offer.offer_slug %}">Ajouter au panier</a>
     </p>
     {% endif %}
 
