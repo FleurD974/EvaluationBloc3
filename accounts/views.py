@@ -48,5 +48,6 @@ def profile(request):
             messages.add_message(request, messages.ERROR, "Le mot de passe n'est pas valide.")
         
         return redirect("accounts:profile")
+    
     form = UserForm(initial=model_to_dict(request.user, exclude="password"))
     return render(request, 'accounts/profile.html', context={"form": form})

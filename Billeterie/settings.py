@@ -135,3 +135,5 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 AUTH_USER_MODEL = "accounts.Customer"
 DB_PASSWORD = env("DB_PASSWORD")
+STATICFILES_DIRS = [BASE_DIR / "Billeterie" / "static"]
+LOGIN_URL = "/account/login"

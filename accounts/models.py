@@ -2,6 +2,9 @@ import secrets
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.shortcuts import get_object_or_404
+
+from store.models import Cart, Offer, Order
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password, **kwargs):
@@ -30,4 +33,18 @@ class Customer(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
+    
+    def add_to_cart(self, slug):
+        offer = get_object_or_404(Offer, offer_slug=slug)
+        cart, _ = Cart.objects.get_or_create(user=self)
+        order, created = Order.objects.get_or_create(user=self, ordered=False, offer=offer)
+
+        if created:
+            cart.orders.add(order)
+            cart.save()
+        else:
+            order.quantity += 1
+            order.save()
+            
+        return cart
     
