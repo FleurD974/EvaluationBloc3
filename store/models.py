@@ -1,6 +1,7 @@
 import secrets
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 from django.urls import reverse
 
 from Billeterie.settings import AUTH_USER_MODEL
@@ -8,7 +9,7 @@ from Billeterie.settings import AUTH_USER_MODEL
 # Create your models here.
 class Offer(models.Model):
     offer_name = models.CharField(max_length=100)
-    offer_slug = models.SlugField(max_length=100)
+    offer_slug = models.SlugField(max_length=100, blank=True)
     offer_price = models.FloatField(default=0.0)
     offer_numberOfPerson = models.IntegerField(default=0)
     offer_stock = models.IntegerField(default=0)
@@ -18,7 +19,12 @@ class Offer(models.Model):
         return f"{self.offer_name} ({self.offer_stock})"
     
     def get_absolute_url(self):
-        return reverse("offer", kwargs={"slug": self.offer_slug})
+        return reverse("store:offer", kwargs={"slug": self.offer_slug})
+    
+    def save(self, *args, **kwargs):
+        if not self.offer_slug:
+            self.offer_slug = slugify(self.offer_name)
+        return super().save(*args, **kwargs)
     
 class Order(models.Model):
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -38,7 +44,7 @@ class Cart(models.Model):
     ordered_date = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user.email or "Unknown"
 
     def delete(self, *args, **kwargs):
         for order in self.orders.all():

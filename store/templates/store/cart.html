@@ -2,10 +2,18 @@
 
 {% block content %}
 
-{% for order in orders %}
-    <h2>{{ order.offer.offer_name }}</h2>
-    <p>{{ order.quantity }} dans le panier</p>
-{% endfor %}
+<form method="POST" action="{% url 'store:update-quantities' %}">
+    {% csrf_token %}
+    {{ forms.management_form }}
+    {% for form in forms %}
+        <div>
+            <h3>{{ form.instance.offer.offer_name }}</h3>
+            <p>{{ form.instance.offer.description }}</p>
+            {{ form.as_p }}
+        </div>
+    {% endfor %}
+    <button type="submit">Mettre à jour les quantités</button>
+</form>
 
 <form action="{% url 'create-checkout-session' %}" method="POST">
     {% csrf_token %}
