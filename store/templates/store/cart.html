@@ -6,11 +6,13 @@
         {% csrf_token %}
         {{ forms.management_form }}
         {% for form in forms %}
-            <div>
-                <h3>{{ form.instance.offer.offer_name }}</h3>
-                <p>{{ form.instance.offer.offer_description }}</p>
-                {{ form.as_p }}
-            </div>
+            {% if not form.instance.ordered %}
+                <div>
+                    <h3>{{ form.instance.offer.offer_name }}</h3>
+                    <p>{{ form.instance.offer.offer_description }}</p>
+                    {{ form.as_p }}
+                </div>
+            {% endif %}
         {% endfor %}
         <button type="submit" class="btn btn-lg btn-block btn-outline-primary button-width">Mettre à jour les quantités</button>
     </form>

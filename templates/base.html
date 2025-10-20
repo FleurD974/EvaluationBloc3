@@ -26,7 +26,7 @@
             </ul>
             <div class="col-md-3 text-end d-flex align-items-center justify-content-around">
                 {% if user.is_authenticated %}
-                    {% if user.cart and not user.cart.ordered and user.cart.orders.count != 0 %}
+                    {% if user.cart and not user.cart.orders.ordered and user.cart.orders.count != 0 %}
                         <a href="{% url 'store:cart' %}">
                             <i class="fi fi-rr-shopping-cart"></i> ({{ user.cart.orders.count }})
                         </a>

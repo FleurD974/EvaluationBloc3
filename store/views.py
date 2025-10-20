@@ -69,7 +69,7 @@ def create_checkout_session(request):
 
 def checkout_success(request):
     # faire ici la mise à jour des order et tout après achat.
-    request.user.cart.delete()
+    request.user.cart.validate_cart()
     return render(request, 'store/success.html')
 
 def conplete_order():

@@ -46,12 +46,19 @@ class Cart(models.Model):
     def __str__(self):
         return self.user.email or "Unknown"
 
-    def delete(self, *args, **kwargs):
+    def validate_cart(self, *args, **kwargs):
         for order in self.orders.all():
             order.ordered = True
             order.ordered_date = timezone.now()
             order.generated_key = secrets.token_hex(16)
             order.save()
-
+            self.orders.remove(order)
+        
+        self.ordered = True
+        self.ordered_date = timezone.now()
+        self.save()
+        self.delete()
+        
+    def delete(self, *args, **kwargs):
         self.orders.clear()
         super().delete(*args, **kwargs)
