@@ -14,6 +14,9 @@ def index(request):
 def about(request):
     return render(request, 'store/about.html')
 
+def legal_notice(request):
+    return render(request, 'store/legal.html')
+
 def all_offers(request):
     offers = Offer.objects.all()
     return render(request, 'store/offers.html', context={"offers": offers})
