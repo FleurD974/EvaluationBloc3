@@ -20,6 +20,36 @@ class OfferTest(TestCase):
         self.assertEqual(self.offer.get_absolute_url(), reverse("store:offer",
                                                                 kwargs={"slug": self.offer.offer_slug}))
 
+class OrderTest(TestCase):
+    def setUp(self):
+        offer = Offer.objects.create(
+            offer_name="Offre Test",
+            offer_price=100,
+            offer_numberOfPerson=3,
+            offer_stock=10,
+            offer_description="Offre donnant accès à trois personnes.",
+        )
+        user = Customer.objects.create_user(
+            email="test@test.com",
+            password="pass123",
+            generated_key="t3st2"
+        )
+        self.order = Order.objects.create(
+            user=user,
+            offer=offer,
+            quantity=3,
+            ordered=True,
+            generated_key="other23"
+        )
+
+    def test_decrease_offer_quantity(self):
+        self.order.decrease_offer_quantity()
+        self.assertEqual(self.order.offer.offer_stock, 7)
+
+    def test_generate_qr_code_fill_database_field(self):
+        self.order.generate_qr_code()
+        self.assertEqual(self.order.generated_qr_code, "../../media/qr_codes/qr_code-other23.png")
+
 class CartTest(TestCase):
     def setUp(self):
         user = Customer.objects.create_user(
@@ -39,9 +69,9 @@ class CartTest(TestCase):
         self.cart.orders.add(order)
         self.cart.save()
         
-    def test_orders_are_updated_when_cart_is_deleted(self):
+    def test_orders_are_updated_when_cart_is_validated(self):
         orders_pk = [order.pk for order in self.cart.orders.all()]
-        self.cart.delete()
+        self.cart.validate_cart()
         for order_pk in orders_pk:
             order = Order.objects.get(pk=order_pk)
             self.assertIsNotNone(order.ordered_date)

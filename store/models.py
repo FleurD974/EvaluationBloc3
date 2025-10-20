@@ -14,13 +14,13 @@ class Offer(models.Model):
     offer_numberOfPerson = models.IntegerField(default=0)
     offer_stock = models.IntegerField(default=0)
     offer_description = models.TextField(blank=True)
-    
+
     def __str__(self):
         return f"{self.offer_name} ({self.offer_stock})"
-    
+
     def get_absolute_url(self):
         return reverse("store:offer", kwargs={"slug": self.offer_slug})
-    
+
     def save(self, *args, **kwargs):
         if not self.offer_slug:
             self.offer_slug = slugify(self.offer_name)
@@ -34,10 +34,10 @@ class Order(models.Model):
     ordered_date = models.DateTimeField(blank=True, null=True)
     generated_key = models.CharField(max_length=255, default="")
     generated_qr_code = models.CharField(max_length=255, default="")
-    
+
     def __str__(self):
         return f"{self.offer.offer_name} ({self.quantity})"
-    
+
     def generate_qr_code(self):
         qr_data = f"User: {self.user.generated_key} order: {self.generated_key}"
         image = qrcode.make(qr_data)
