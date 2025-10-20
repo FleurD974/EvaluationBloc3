@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-fr'
 
 TIME_ZONE = 'UTC'
 
@@ -133,6 +133,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_QRCODE = BASE_DIR / "media" / "qr_codes"
 AUTH_USER_MODEL = "accounts.Customer"
 DB_PASSWORD = env("DB_PASSWORD")
 STATICFILES_DIRS = [BASE_DIR / "Billeterie" / "static"]

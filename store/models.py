@@ -1,10 +1,12 @@
 import secrets
+import qrcode
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
-from django.urls import reverse
 
-from Billeterie.settings import AUTH_USER_MODEL
+from Billeterie.settings import AUTH_USER_MODEL, MEDIA_QRCODE
+
 
 # Create your models here.
 class Offer(models.Model):
@@ -33,9 +35,18 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     ordered_date = models.DateTimeField(blank=True, null=True)
     generated_key = models.CharField(max_length=255, default="")
+    generated_qr_code = models.CharField(max_length=255, default="")
     
     def __str__(self):
         return f"{self.offer.offer_name} ({self.quantity})"
+    
+    def generate_qr_code(self):
+        qr_data = f"User: {self.user.generated_key} order: {self.generated_key}"
+        image = qrcode.make(qr_data)
+        file_name = f"qr_code-{self.generated_key}" + ".png"
+        image.save(MEDIA_QRCODE / file_name)
+        self.generated_qr_code = "../../media/qr_codes/" + file_name
+        self.save()
     
 class Cart(models.Model):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -52,6 +63,7 @@ class Cart(models.Model):
             order.ordered_date = timezone.now()
             order.generated_key = secrets.token_hex(16)
             order.save()
+            order.generate_qr_code()
             self.orders.remove(order)
         
         self.ordered = True

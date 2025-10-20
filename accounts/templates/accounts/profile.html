@@ -22,7 +22,10 @@
             <h2>Mes commandes</h2>
             <ul>
             {% for order in orders %}
-            <li>{{ order.offer.offer_name }} ({{ order.quantity }}) {% if order.ordered_date %}le {{ order.ordered_date }}{% endif %}</li>
+            <li>
+                <p>{{ order.offer.offer_name }} ({{ order.quantity }}) {% if order.ordered_date %}le {{ order.ordered_date }}{% endif %}.</p>
+                <p>QR Code correspondant: <img src="{{ order.generated_qr_code }}" alt="QR code de la commande"></p>
+            </li>
             {% endfor %}
             </ul>
         </div>
