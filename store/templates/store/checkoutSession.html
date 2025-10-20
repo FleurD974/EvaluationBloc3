@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <div id="checkout-container" class="container">
+        <h1>Paiement</h1>
+        <h3>Votre panier contient:</h3>
+        <ul class="list-group">
+            {% for item in items %}
+            <li>{{ item.name }}: {{ item.quantity }}</li>
+            {% endfor %}
+        </ul>
+        <h5>Pour un total de: {{ total }}€</h5>
+        <div id="checkout-buttons">
+            <a href="{% url 'store:checkout-success' %}" class="btn btn-lg btn-block btn-outline-primary button-width">Valider le paiement</a>
+            <a href="{% url 'store:cart' %}" class="btn btn-lg btn-block btn-outline-secondary button-width">Retour au panier</a>
+        </div>
+
+    </div>
+</main>
+
+{% endblock %}

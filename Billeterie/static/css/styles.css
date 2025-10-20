@@ -13,6 +13,21 @@
     justify-items: start;
 }
 
+#checkout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#checkout-buttons {
+    padding-top: 15px;
+}
+
+#checkout-buttons a {
+    margin: 10px;
+}
+
 .button-width {
     width: 20rem;
 }

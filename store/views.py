@@ -57,10 +57,15 @@ def delete_cart(request):
 
 def create_checkout_session(request):
     cart = request.user.cart
+    orders = cart.orders.all()
     items_in_cart = [{"price": order.offer.offer_price,
-                        "quantity": order.quantity} for order in cart.orders.all()]
-    
-    return redirect('index', code=303)
+                        "quantity": order.quantity,
+                        "name": order.offer.offer_name} for order in orders]
+    total = 0
+    for order in orders:
+        total += order.offer.offer_price * order.quantity
+
+    return render(request, 'store/checkoutSession.html', context={"items": items_in_cart, "total": total})
 
 def checkout_success(request):
     # faire ici la mise à jour des order et tout après achat.

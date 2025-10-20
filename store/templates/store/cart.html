@@ -15,6 +15,7 @@
         <button type="submit" class="btn btn-lg btn-block btn-outline-primary button-width">Mettre à jour les quantités</button>
     </form>
 
+    {% comment %} later it will redirect to stripe {% endcomment %}
     <form action="{% url 'store:create-checkout-session' %}" method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-lg btn-block btn-outline-primary button-width">Procéder au paiement</button>
