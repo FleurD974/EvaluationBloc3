@@ -7,8 +7,6 @@ from django.utils.text import slugify
 
 from Billeterie.settings import AUTH_USER_MODEL, MEDIA_QRCODE
 
-
-# Create your models here.
 class Offer(models.Model):
     offer_name = models.CharField(max_length=100)
     offer_slug = models.SlugField(max_length=100, blank=True)
@@ -47,6 +45,11 @@ class Order(models.Model):
         image.save(MEDIA_QRCODE / file_name)
         self.generated_qr_code = "../../media/qr_codes/" + file_name
         self.save()
+
+    def decrease_offer_quantity(self):
+        new_quantity = self.offer.offer_stock - self.quantity
+        self.offer.offer_stock = new_quantity
+        self.offer.save()
     
 class Cart(models.Model):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -62,6 +65,7 @@ class Cart(models.Model):
             order.ordered = True
             order.ordered_date = timezone.now()
             order.generated_key = secrets.token_hex(16)
+            order.decrease_offer_quantity()
             order.save()
             order.generate_qr_code()
             self.orders.remove(order)
