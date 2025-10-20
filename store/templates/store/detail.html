@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-
-    <h2>{{ offer.offer_name }}</h2>
-    <h3>{{ offer.offer_price }}€</h3>
-    <p>{{ offer.offer_description }}</p>
-    <p>{{ offer.offer_stock }} en stock</p>
-    
-    {% if user.is_authenticated %}
-    <p>
-        <a href="{% url 'store:add-to-cart' offer.offer_slug %}">Ajouter au panier</a>
-    </p>
-    {% endif %}
+    <main>
+        <div id="offercontainer" class="container">
+            <h2>{{ offer.offer_name }}</h2>
+            <h3>{{ offer.offer_price }}€</h3>
+            <p>{{ offer.offer_description }}</p>
+            <p>{{ offer.offer_stock }} en stock</p>
+            
+            {% if user.is_authenticated %}
+            <p>
+                <a href="{% url 'store:add-to-cart' offer.offer_slug %}" class="btn btn-lg btn-block btn-outline-primary">Ajouter au panier</a>
+            </p>
+            {% endif %}
+        </div>
+    </main>
 
 {% endblock %}
