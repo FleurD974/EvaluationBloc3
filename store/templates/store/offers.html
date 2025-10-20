@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <main>
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Les offres</h1>
+            <p class="lead">Les différentes offres que nous vous proposons donnent vous permettent d'accèder à l'évenement. Attention le nombre de personne est différent pour chaque offre.</p>
+        </div>
+        <div class="container">
+            <div class="card-deck mb-3 text-center">
+                {% for offer in offers %}
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{ offer.offer_name }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">{{ offer.offer_price }} <small class="text-muted">€</small></h1>
+                        <p>{{ offer.offer_description }}</p>
+                        <a href="{{ offer.get_absolute_url }}" class="btn btn-lg btn-block btn-outline-primary">Voir l'offre</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

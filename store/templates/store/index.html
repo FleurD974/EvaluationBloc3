@@ -11,7 +11,7 @@
                     <h1 class="display-5 fw-bold lh-1 mb-3">Paris acceuille les Jeux olympiques 2024!</h1>
                     <p class="lead">La ville Lumière a la chance et l'honneur d'acceuillir les Jeux olympiques et paralympiques de 2024. Vous pourrez trouver sur ce site différentes offres vous permettant d'accèder aux épreuves.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                        <a href="#" class="btn btn-primary btn-lg px-4 me-md-2">Accéder aux offres</a>
+                        <a href="{% url 'store:all-offers' %}" class="btn btn-primary btn-lg px-4 me-md-2">Accéder aux offres</a>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <li>Des épreuves se déroulant sur tout le territoire français</li>
             </ul>
         </div>
-                <div class="container">
+        <div class="container">
             <h2>Quelles épreuves pourrez vous retrouver ?</h2>
             <div class="d-flex justify-content-between">
                 <div class="card" style="width: 18rem;">
@@ -59,9 +59,5 @@
             </div>
         </div>
     </main>
-{% for offer in offers %}
-    <h2>{{ offer.offer_name }}</h2>
-    <a href="{{ offer.get_absolute_url }}">Voir l'offre</a>
-{% endfor %}
 
 {% endblock %}
