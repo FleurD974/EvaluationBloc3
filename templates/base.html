@@ -22,7 +22,7 @@
                 <li><a href="{% url 'index' %}" class="nav-link px-2 link-secondary">Acceuil</a></li>
                 <li><a href="{% url 'store:all-offers' %}" class="nav-link px-2 link-dark">Les offres</a></li>
                 <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">A propos</a></li>
+                <li><a href="{% url 'about' %}" class="nav-link px-2 link-dark">A propos</a></li>
             </ul>
             <div class="col-md-3 text-end d-flex align-items-center justify-content-around">
                 {% if user.is_authenticated %}
@@ -47,11 +47,11 @@
     <div class="container"> 
         <footer class="py-3 my-4"> 
             <ul class="nav justify-content-center border-bottom pb-3 mb-3"> 
-                <li class="nav-item"><a href="{% url 'index' %}" class="nav-link px-2 text-body-secondary">Acceuil</a></li> 
-                <li class="nav-item"><a href="{% url 'store:all-offers' %}" class="nav-link px-2 text-body-secondary">Les offres</a></li> 
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li> 
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">A propos</a></li> 
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Mentions légales</a></li> 
+                <li class="nav-item"><a href="{% url 'index' %}" class="nav-link px-2 text-body-secondary">Acceuil</a></li>
+                <li class="nav-item"><a href="{% url 'store:all-offers' %}" class="nav-link px-2 text-body-secondary">Les offres</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+                <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">A propos</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Mentions légales</a></li>
             </ul> 
             <p class="text-center text-body-secondary">© Jeux olympiques Paris 2024</p>
         </footer>

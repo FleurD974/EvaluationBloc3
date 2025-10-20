@@ -11,6 +11,9 @@ def index(request):
     offers = Offer.objects.all()
     return render(request, 'store/index.html', context={"offers": offers})
 
+def about(request):
+    return render(request, 'store/about.html')
+
 def all_offers(request):
     offers = Offer.objects.all()
     return render(request, 'store/offers.html', context={"offers": offers})
