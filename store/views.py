@@ -27,7 +27,7 @@ def offer_detail(request, slug):
 
 @login_required
 def cart(request):
-    orders = Order.objects.filter(user=request.user)
+    orders = Order.objects.filter(user=request.user, ordered=False)
     if orders.count() == 0:
         return redirect('index')
     OrderFormSet = modelformset_factory(Order, form=OrderForm, extra=0)

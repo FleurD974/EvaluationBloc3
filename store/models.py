@@ -70,9 +70,6 @@ class Cart(models.Model):
             order.generate_qr_code()
             self.orders.remove(order)
         
-        self.ordered = True
-        self.ordered_date = timezone.now()
-        self.save()
         self.delete()
         
     def delete(self, *args, **kwargs):
