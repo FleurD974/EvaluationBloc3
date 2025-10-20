@@ -1,21 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<main>
+    <div class="container">
+        <h1 class="h3 mb-3 fw-normal">Mon profil</h1>
+        <form method="POST">
+            <h2>Mes informations</h2>
+            {% csrf_token %}
+                {{ form }}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages%}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-
-    {% if messages %}
-
-    <ul>
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-
-    {% endif %}
-    <button type="submit">Sauvegarder</button>
-</form>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Mettre à jour</button>
+        </form>
+        <div id="orders-list">
+            <h2>Mes commandes</h2>
+            <ul>
+            {% for order in orders %}
+            <li>{{ order.offer.offer_name }} ({{ order.quantity }}) {% if order.ordered_date %}le {{ order.ordered_date }}{% endif %}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</main>
 
 {% endblock%}
