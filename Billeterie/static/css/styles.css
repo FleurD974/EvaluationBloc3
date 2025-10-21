@@ -61,4 +61,23 @@ form button {
     color: #4b0000,
 }
 
-.hidden { display: none; }
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.close-btn:hover {
+    color: #000;
+}

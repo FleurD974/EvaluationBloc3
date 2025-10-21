@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
     messages.forEach(function (msg) {
         setTimeout(() => {
             msg.classList.add('hidden');
+            //Remove from dom after effect
+            setTimeout(() => {
+                msg.remove();
+            }, 500);
         }, 4000);
     });
 });

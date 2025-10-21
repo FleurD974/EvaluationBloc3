@@ -27,12 +27,14 @@ def login_user(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
+            messages.add_message(request, messages.INFO, "Bienvenue, vous êtes connecté")
             return redirect('index')
         
     return render(request, 'accounts/login.html')
 
 def logout_user(request):
     logout(request)
+    messages.add_message(request, messages.INFO, "Vous avez été déconnecté")
     return redirect('index')
 
 @login_required
