@@ -10,6 +10,14 @@ from store.models import Order
 User = get_user_model()
 
 def signup(request):
+    """Signing up new user
+
+    Args:
+        request (request): The received request
+
+    Returns:
+        HttpResponse: the view to render
+    """
     if request.method == "POST":
         #signup form treatment
         email =request.POST.get("email")
@@ -39,6 +47,14 @@ def logout_user(request):
 
 @login_required
 def profile(request):
+    """Verify the user and pass the needed informations
+
+    Args:
+        request (): Received request
+
+    Returns:
+        HttpResponse|HttpResponseRedirect : the view to render
+    """
     if request.method == "POST":
         is_valid = authenticate(email=request.POST.get("email"), password=request.POST.get("password"))
         if is_valid:

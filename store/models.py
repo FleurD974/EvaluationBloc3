@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from Billeterie.settings import AUTH_USER_MODEL, MEDIA_QRCODE
 
 class Offer(models.Model):
+    """"Represents an offer"""
     offer_name = models.CharField(max_length=100)
     offer_slug = models.SlugField(max_length=100, blank=True)
     offer_price = models.FloatField(default=0.0)
@@ -27,6 +28,7 @@ class Offer(models.Model):
         return super().save(*args, **kwargs)
     
 class Order(models.Model):
+    """"Represents an order containing offer"""
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     offer = models.ForeignKey(Offer, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
@@ -39,6 +41,7 @@ class Order(models.Model):
         return f"{self.offer.offer_name} ({self.quantity})"
 
     def generate_qr_code(self):
+        """Generate a qr code based on the two generated key"""
         qr_data = f"User: {self.user.generated_key} order: {self.generated_key}"
         image = qrcode.make(qr_data)
         file_name = f"qr_code-{self.generated_key}" + ".png"
@@ -47,11 +50,13 @@ class Order(models.Model):
         self.save()
 
     def decrease_offer_quantity(self):
+        """Allows to decrease quantity of an offer in the cart"""
         new_quantity = self.offer.offer_stock - self.quantity
         self.offer.offer_stock = new_quantity
         self.offer.save()
     
 class Cart(models.Model):
+    """"Represents cart"""
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
     orders = models.ManyToManyField(Order)
     ordered = models.BooleanField(default=False)
@@ -61,6 +66,7 @@ class Cart(models.Model):
         return self.user.email or "Unknown"
 
     def validate_cart(self, *args, **kwargs):
+        """Validate cart when purchasing"""
         for order in self.orders.all():
             order.ordered = True
             order.ordered_date = timezone.now()

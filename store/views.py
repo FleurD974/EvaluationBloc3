@@ -68,9 +68,5 @@ def create_checkout_session(request):
     return render(request, 'store/checkoutSession.html', context={"items": items_in_cart, "total": total})
 
 def checkout_success(request):
-    # faire ici la mise à jour des order et tout après achat.
     request.user.cart.validate_cart()
     return render(request, 'store/success.html')
-
-def conplete_order():
-    pass

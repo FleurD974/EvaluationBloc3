@@ -26,6 +26,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class Customer(AbstractUser):
+    """"Class to handle customer"""
     username = None
     email = models.EmailField(max_length=240, unique=True)
     generated_key = models.CharField(max_length=255, default=secrets.token_hex(16), blank=True)
@@ -35,6 +36,12 @@ class Customer(AbstractUser):
     objects = CustomUserManager()
     
     def add_to_cart(self, slug):
+        """
+        Add an order to the cart or increment if already in
+
+        Args:
+            slug (str): offer slug
+        """
         offer = get_object_or_404(Offer, offer_slug=slug)
         cart, _ = Cart.objects.get_or_create(user=self)
         order, created = Order.objects.get_or_create(user=self, ordered=False, offer=offer)
