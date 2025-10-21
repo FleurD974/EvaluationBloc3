@@ -84,10 +84,11 @@ WSGI_APPLICATION = 'Billeterie.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'OPTIONS': {
-            'service': 'my_service',
-            'passfile': '.my_pgpass'
-        },
+        'HOST': 'localhost',
+        'USER': 'test_billeterie',
+        'PASSWORD': 'testMDP26',
+        'NAME': 'JOBilleterie_db',
+        'PORT': '5432'
     }
 }
 
