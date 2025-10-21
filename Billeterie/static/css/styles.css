@@ -35,3 +35,30 @@ form button {
 .button-width {
     width: 20rem;
 }
+
+#messages {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.message {
+    position: absolute;
+    top: 25%;
+    left: 45%
+}
+
+.success { 
+    background-color: #5cb85c;
+    color: #216e28	;
+}
+
+.error { 
+    background-color: #d9534f;
+    color: #4b0000,
+}
+
+.hidden { display: none; }

@@ -9,11 +9,13 @@
             {% csrf_token %}
                 {{ form }}
                 {% if messages %}
-                    <ul>
-                        {% for message in messages%}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
+                <div id="messages">
+                    {% for message in messages%}
+                    <div class="alert alert-info message {{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
                 {% endif %}
 
             <button type="submit" class="w-100 btn btn-lg btn-primary">Mettre à jour</button>
